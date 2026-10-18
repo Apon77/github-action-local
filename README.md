@@ -4,8 +4,7 @@ Run GitHub Actions (`act`) locally both for root and non root user.
 
 ### Prerequisites
 
-Ensure `curl`, `sudo` and `docker` are installed on your host system, and `docker` is running and allowed to run by curret user.
-
+Ensure `curl`, `sudo` and `docker` are installed on your host system, and `docker` is running and allowed to run by current user.
 
 ### Installation
 
@@ -13,10 +12,10 @@ Ensure `curl`, `sudo` and `docker` are installed on your host system, and `docke
 curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
 ```
 
-### File: `.github/workflows/tests.yml`
-k is current username in line  `cp /home/k/github-action . -r   `
+### File: `.github/workflows/test.yml`
+k is current username in line `cp /home/k/github-action-local . -r`
 
-github-action is current project dir
+github-action-local is current project dir
 
 ```yaml
 name: Tests
@@ -25,24 +24,19 @@ on:
     branches: [ main ]
 jobs:
   build:
-    runs-on: ubuntu-24.04
-    container:
-      image: ubuntu:24.04
+    runs-on: ubuntu:local
     steps:
       - uses: actions/checkout@v4
       - name: root
         run: |
           whoami
           pwd
-          ls -lah
-      - uses: actions/checkout@v4
       - name: non root
         shell: su - ubuntu -c "bash {0}"
         run: |
-          cp /home/k/github-action . -r && cd github-action
+          cp /home/k/github-action-local . -r && cd github-action-local
           whoami
-          pwd
-          ls -lah
+          curl -V
 ```
 
 ### Execution Command
@@ -50,5 +44,5 @@ jobs:
 Navigate to the project root directory and run:
 
 ```bash
-act push
+act push -P ubuntu:local=ubuntu:local --pull=false
 ```

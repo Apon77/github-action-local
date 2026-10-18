@@ -4,21 +4,16 @@ on:
     branches: [ main ]
 jobs:
   build:
-    runs-on: ubuntu-24.04
-    container:
-      image: ubuntu:24.04
+    runs-on: ubuntu:local
     steps:
       - uses: actions/checkout@v4
       - name: root
         run: |
           whoami
           pwd
-          ls -lah 
-      - uses: actions/checkout@v4
       - name: non root
         shell: su - ubuntu -c "bash {0}"
         run: |
-          cp /home/k/github-action . -r && cd github-action
+          cp /home/k/github-action-local . -r && cd github-action-local
           whoami
-          pwd
-          ls -lah
+          curl -V
