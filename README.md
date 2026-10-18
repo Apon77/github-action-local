@@ -53,3 +53,11 @@ or
 alias act="act -P ubuntu-latest=ubuntu:local --pull=false"
 act push
 ```
+
+If you want running docker container to be as tagged as ubuntu:local type this
+
+```bash
+docker commit --change="USER runner" ac67dbfa0c4f ubuntu:local
+```
+
+If you want to tag by dockerfile use that, make sure user runner is created and non sudo user
