@@ -27,12 +27,12 @@ jobs:
     runs-on: ubuntu:local
     steps:
       - uses: actions/checkout@v4
-      - name: root
+      - name: default user
         run: |
           whoami
           pwd
-      - name: non root
-        shell: su - ubuntu -c "bash {0}"
+      - name: user runner
+        shell: su - runner -c "bash {0}"
         run: |
           cp /home/k/github-action-local . -r && cd github-action-local
           whoami

@@ -10,14 +10,7 @@ jobs:
       - name: default user
         run: |
           whoami
-          pwd
-          cat /etc/os*
-          curl -V
       - name: user runner
         shell: su - runner -c "bash {0}"
         run: |
-          cp /home/k/github-action-local . -r && cd github-action-local
           whoami
-          pwd
-          cat /etc/os*
-          curl -V
