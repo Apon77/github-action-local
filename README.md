@@ -44,5 +44,5 @@ jobs:
 Navigate to the project root directory and run:
 
 ```bash
-act push -P ubuntu:local=ubuntu:local --pull=false
+act push -P ubuntu-latest=ubuntu:local --pull=false
 ```

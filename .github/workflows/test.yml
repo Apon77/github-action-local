@@ -4,7 +4,7 @@ on:
     branches: [ main ]
 jobs:
   build:
-    runs-on: ubuntu:local
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: root
@@ -16,4 +16,5 @@ jobs:
         run: |
           cp /home/k/github-action-local . -r && cd github-action-local
           whoami
+          cat /etc/os*
           curl -V
