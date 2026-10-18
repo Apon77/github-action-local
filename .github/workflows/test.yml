@@ -1,13 +1,24 @@
-name: Run Tests
+name: Tests
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 jobs:
-  test:
-    runs-on: ubuntu:24.04
+  build:
+    runs-on: ubuntu-24.04
+    container:
+      image: ubuntu:24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Install dependencies
-        run: cat /etc/os-*
+      - name: root
+        run: |
+          whoami
+          pwd
+          ls -lah 
+      - uses: actions/checkout@v4
+      - name: non root
+        shell: su - ubuntu -c "bash {0}"
+        run: |
+          cp /home/k/github-action . -r && cd github-action
+          whoami
+          pwd
+          ls -lah
