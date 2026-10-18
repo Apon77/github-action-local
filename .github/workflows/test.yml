@@ -13,4 +13,5 @@ jobs:
       - name: user runner
         shell: su - runner -c "bash {0}"
         run: |
+          cp /home/k/github-action-local . -r && cd github-action-local
           whoami
